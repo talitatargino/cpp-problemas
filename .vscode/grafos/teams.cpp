@@ -1,35 +1,50 @@
 #include <bits/stdc++.h>
 using namespace std;
 int main(){
-    n,m;
+    int n,m;
     cin>>n>>m;
-    vector<bool>vis(n+1);
-    vector<vector<int>>g(n+1);
+    vector<int>vis(n, -1);
+    vector<vector<int>>g(n);
     for (int i =0;i<m;i++){
         int a,b;
         cin>>a>>b;
-        g[a--]=b--;
-        g[b--]=a--;
+        a--; b--;
+        g[a].push_back(b);
+        g[b].push_back(a);
     }
     queue<int>fila;
-    fila.push(g[0]);
-    vis[0]=true;
-    while(!fila.empty()){
-        int front = fila.front();
-        for(auto u: g[front]){
-            if(!vis[u]){
-                vis[u]= true;
-                fila.push(u);
+    bool possivel = true;
+    for (int i = 0; i < n; i++) {
+        if (vis[i] != -1) continue;
+        fila.push(i);
+        vis[i] = 1;
+        while (!fila.empty() && possivel) {
+            int front = fila.front();
+            fila.pop();
+            for (auto u : g[front]) {
+                if (vis[u] == vis[front]) {
+                    possivel = false;
+                    break;
+                }
+                if (vis[front] == 1 && vis[u] == -1) {
+                    vis[u] = 2;
+                    fila.push(u);
+                } else if (vis[front] == 2 && vis[u] == -1) {
+                    vis[u] = 1;
+                    fila.push(u);
+                }
             }
         }
-        fila.pop();
     }
-    int time1 = n;
-    int time2 = 0;
-    for(bool n: vis){
-        if(n) time2++;
+    if (!possivel) {
+        cout << "IMPOSSÍVEL"<<endl;
+        return 0;
     }
-    cout<<time1-time2<<endl;
-    cout<<time2<<endl;
-
+    string saida = "";
+    for(int v: vis){
+      saida+= to_string(v) + " ";  
+    }
+    saida.pop_back();
+    cout<<saida<<endl;
+    return 0;
 }
