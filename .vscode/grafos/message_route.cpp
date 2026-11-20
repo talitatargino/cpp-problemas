@@ -15,26 +15,33 @@ int main(){
     queue<int>fila;
     fila.push(0);
     pai[0]=0;
-    while(!fila.empty){
+    while(!fila.empty()){
         int i = fila.front();
         fila.pop();
         for(int v: g[i]){
             if(pai[v]==-1){
-                fila.push();
+                fila.push(v);
                 pai[v]= i;
                 }
             }
     }
     if(pai[n-1]==-1){
-        cout<<"IMPOSSIBLE\n";
+        cout<<"IMPOSSIBLE"<<endl;
         return 0;
     }
     vector<int>saida;
-    int atual = n;
-    while(atual>0){
+    int atual = n-1;
+    while(atual!=0){
         saida.push_back(atual);
         atual = pai[atual];
     }
     saida.push_back(0);
-    
+    cout<<saida.size()<<endl;
+    reverse(saida.begin(), saida.end());
+    for (int i =0;i<saida.size();i++){
+        cout<<saida[i]+1;
+        if(i<saida.size()-1){
+            cout<<" ";
+        }
+    }
 }
