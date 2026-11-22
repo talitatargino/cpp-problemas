@@ -23,14 +23,14 @@ int main(){
                     for (int d =0;d<4;d++){
                         int nr = cr +dr[d];
                         int nc = cc +dc[d];
-                    }
-                    if(nr>=0 && nr<n && nc>=0 && nc<0 && grid[nr][nc]=='.'){
+                        if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc]=='.'){
                         grid[nr][nc]='#';
                         fila.push({nr,nc});
                     }
+                
                 }
             }
-
+        }
         }
     }
     cout<<comodos<<endl;
