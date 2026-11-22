@@ -1,4 +1,4 @@
-#include <bits/sstdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 int main(){
     int n,m;
@@ -6,7 +6,7 @@ int main(){
     vector<vector<int>>g(n);
     vector<int>ouro(n);
     vector<bool>vis(n,false);
-    bool primeiro = false;
+    int ans = 0;
     for(int i=0;i<n;i++){
         cin>>ouro[i];
     }
@@ -23,12 +23,12 @@ int main(){
         if(!vis[i]){
             vis[i]=true;
             fila.push(i);
-            ans+= ouro[v];
+            ans+= ouro[i];
         }
         while(!fila.empty()){
-            int f = fila.front();
+            int front = fila.front();
             fila.pop();
-            for(int v: vis[f]){
+            for(int v: g[front]){
                 if(!vis[v]){
                     vis[v]= true;
                     fila.push(v);
