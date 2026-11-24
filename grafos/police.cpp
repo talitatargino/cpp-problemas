@@ -16,7 +16,7 @@ int main(){
     int qnt_menor = g[0].size();
     for (int i =0;i<n;i++){
         if(g[i].size()<qnt_menor){
-            qnt_menor = q[i].size();
+            qnt_menor = g[i].size();
             indice_menor = i;
         }
     }
@@ -25,7 +25,11 @@ int main(){
         ans[v]=0;
     }
     ans[indice_menor]=0;
-    for (int i: ans){
-        cout<<i<<" ";
+    for(int i=0;i<n;i++){
+        cout<<ans[i];
+        if(i!=n-1){
+            cout<<" ";
+        }
     }
+    return 0;
 }
